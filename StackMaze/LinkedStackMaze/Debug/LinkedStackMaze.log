@@ -1,0 +1,3 @@
+﻿  LinkedStackMaze.cpp
+C:\Users\kiyon\OneDrive\바탕 화면\projectmaze-main\projectmaze-main\LinkedStackMaze\LinkedStackMaze.cpp(51): warning C4715: 'stackMaze::mazeSize': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  LinkedStackMaze.vcxproj -> C:\Users\kiyon\OneDrive\바탕 화면\projectmaze-main\projectmaze-main\Debug\LinkedStackMaze.exe
