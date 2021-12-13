@@ -191,6 +191,6 @@ public:
 int main() {
     stackMaze maze1;
     maze1.setMaze("maze.txt");
-    //maze1.searchHeigt();
-    maze1.searchWidth();
+    maze1.searchHeigt();
+    
 }

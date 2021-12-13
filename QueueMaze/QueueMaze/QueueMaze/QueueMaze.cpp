@@ -182,7 +182,6 @@ public:
 
 int main() {
     queueMaze maze1;
-    maze1.setMaze("maze2.txt");
-    //maze1.searchHeight();
+    maze1.setMaze("maze.txt");
     maze1.searchWidth();
 }

@@ -8,8 +8,5 @@ public:
 	~Node() { if (location != NULL) delete location; }
 	Node* getLink() { return link; }
 	void setLink(Node* p) { link = p; }
-	Location* getLocation() { return location; }
-	
-
-	
+	Location* getLocation() { return location; }	
 };
