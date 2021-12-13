@@ -64,7 +64,7 @@ public:
                             fscanf_s(Maze, "%d", &map[i][j]);
                             break;
                         }
-                        else if (d == 'e') { // 'e' 표시 되어 있는 위치를 스택에 푸시
+                        else if (d == 'e') { // 'e' 표시 되어 있는 위치를 queue에 푸시
                             map[i][j] = d;
                             Node* entry = new Node(i, j);
                             locQueue.enqueue(entry);
@@ -128,7 +128,7 @@ public:
         bluePrint(); //초기 map 상태 보여주기 위함
 
         while (locQueue.isEmpty() == false) {
-            Location* here = locQueue.dequeue()->getLocation(); //현재 위치는 setMaze에서 push 했던 entry위치
+            Location* here = locQueue.dequeue()->getLocation(); //현재 위치는 setMaze에서 enqueue 했던 entry위치
 
             int r = here->getRow();
             int c = here->getCol();
@@ -156,7 +156,7 @@ public:
         bluePrint(); //초기 map 상태 보여주기 위함
 
         while (locQueue.isEmpty() == false) {
-            Location* here = locQueue.dequeue()->getLocation(); //현재 위치는 setMaze에서 push 했던 entry위치
+            Location* here = locQueue.dequeue()->getLocation(); //현재 위치는 setMaze에서 enqueue 했던 entry위치
 
             int r = here->getRow();
             int c = here->getCol();
