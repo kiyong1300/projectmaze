@@ -20,7 +20,7 @@ public:
             map[i] = new int[col];
     }
 
-    bool mazeSize(const char* file) // ¹Ì·ÎÀÇ max »çÀÌÁî ±¸ÇÏ±â
+    bool mazeSize(const char* file) // ë¯¸ë¡œì˜ max ì‚¬ì´ì¦ˆ êµ¬í•˜ê¸°
     {
         char d;
         int c = 0, r = 0;
@@ -33,22 +33,22 @@ public:
         }
         else if (Maze != NULL)
         {
-            while ((d = fgetc(Maze)) != '\n' && d != '\r') // °³ÇàÀÌ ¾Æ´Ï°í ºó°ø°£ÀÌ ¾Æ´Ò¶§¿¡ c°ª Áõ°¡
+            while ((d = fgetc(Maze)) != '\n' && d != '\r') // ê°œí–‰ì´ ì•„ë‹ˆê³  ë¹ˆê³µê°„ì´ ì•„ë‹ë•Œì— cê°’ ì¦ê°€
             {
                 if (d != ' ') c++;
             }
-            while ((d = fgetc(Maze)) != EOF) // fileÀÇ ³¡ÀÌ ¾Æ´Ï°í ÀĞ¾î¿Â d°¡ °³ÇàÀÏ¶§ r°ª Áõ°¡
+            while ((d = fgetc(Maze)) != EOF) // fileì˜ ëì´ ì•„ë‹ˆê³  ì½ì–´ì˜¨ dê°€ ê°œí–‰ì¼ë•Œ rê°’ ì¦ê°€
             {
                 if (d == '\n') r++;
             }
             fclose(Maze);
         }
-        row = r; // row °ªÀ» r·Î ÃÊ±âÈ­ - Çà
-        col = c; // col °ªÀ» c·Î ÃÊ±âÈ­ - ¿­
+        row = r; // row ê°’ì„ rë¡œ ì´ˆê¸°í™” - í–‰
+        col = c; // col ê°’ì„ cë¡œ ì´ˆê¸°í™” - ì—´
         set(row, col);
     }
 
-    void setMaze(const char* file) // ÀÔ±¸, Ãâ±¸ À§Ä¡ set
+    void setMaze(const char* file) // ì…êµ¬, ì¶œêµ¬ ìœ„ì¹˜ set
     {
         mazeSize(file);
         char d;
@@ -59,18 +59,18 @@ public:
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < col; j++) {
                     while (d = getc(Maze)) {
-                        if ((d == '0' || d == '1')) { // 0ÀÌ³ª 1·Î Ç¥½Ã µÇ¾î ÀÖ´Â ±ÛÀÚ´Â ¹«½Ã
+                        if ((d == '0' || d == '1')) { // 0ì´ë‚˜ 1ë¡œ í‘œì‹œ ë˜ì–´ ìˆëŠ” ê¸€ìëŠ” ë¬´ì‹œ
                             ungetc(d, Maze);
                             fscanf_s(Maze, "%d", &map[i][j]);
                             break;
                         }
-                        else if (d == 'e') { // 'e' Ç¥½Ã µÇ¾î ÀÖ´Â À§Ä¡¸¦ ½ºÅÃ¿¡ Çª½Ã
+                        else if (d == 'e') { // 'e' í‘œì‹œ ë˜ì–´ ìˆëŠ” ìœ„ì¹˜ë¥¼ queueì— 
                             map[i][j] = d;
                             Node* entry = new Node(i, j);
                             locQueue.enqueue(entry);
                             break;
                         }
-                        else if (d == 'x') { // 'x' Ç¥½Ã µÇ¾î ÀÖ´Â À§Ä¡ exitLoc¿¡ ÀúÀå(Ãâ±¸)
+                        else if (d == 'x') { // 'x' í‘œì‹œ ë˜ì–´ ìˆëŠ” ìœ„ì¹˜ exitLocì— ì €ì¥(ì¶œêµ¬)
                             map[i][j] = d;
                             exitLoc.setRow(i);
                             exitLoc.setCol(j);
@@ -88,25 +88,25 @@ public:
         {
             for (int j = 0; j < col; j++)
             {
-                if (map[i][j] == 0) //txt ¾È¿¡¼­ 0(±æ)ÀÌ¸é
+                if (map[i][j] == 0) //txt ì•ˆì—ì„œ 0(ê¸¸)ì´ë©´
                 {
                     printf("  ");
                 }
-                else if (map[i][j] == 1) //txt ¾È¿¡¼­ 1(º®)ÀÌ¸é
+                else if (map[i][j] == 1) //txt ì•ˆì—ì„œ 1(ë²½)ì´ë©´
                 {
-                    printf("¡á");
+                    printf("â– ");
                 }
-                else if (map[i][j] == 2) //±æ or º® ÀÌ ¾Æ´Ï¸é ÀÌµ¿°æ·Î·Î Ç¥½ÃµÇ¾îÁü
+                else if (map[i][j] == 2) //ê¸¸ or ë²½ ì´ ì•„ë‹ˆë©´ ì´ë™ê²½ë¡œë¡œ í‘œì‹œë˜ì–´ì§
                 {
-                    printf("¡à");
+                    printf("â–¡");
                 }
-                else if (map[i][j] == 'e') // ÀÔ±¸
+                else if (map[i][j] == 'e') // ì…êµ¬
                 {
-                    printf("¢Ù");
+                    printf("â†˜");
                 }
-                else if (map[i][j] == 'x') // Ãâ±¸
+                else if (map[i][j] == 'x') // ì¶œêµ¬
                 {
-                    printf("¢Ù");
+                    printf("â†˜");
                 }
             }
             printf("\n");
@@ -115,32 +115,32 @@ public:
     }
 
 
-    bool isValidLoc(int r, int c) //¸¸¾à r, c°¡ 0º¸´Ù ÀÛ°Å³ª ÃÖ´ë row col°ª(¹Ì·Î ÃÖ´ñ°ª)À» ¹ş¾î³ª¸é false ¹İÈ¯
+    bool isValidLoc(int r, int c) //ë§Œì•½ r, cê°€ 0ë³´ë‹¤ ì‘ê±°ë‚˜ ìµœëŒ€ row colê°’(ë¯¸ë¡œ ìµœëŒ“ê°’)ì„ ë²—ì–´ë‚˜ë©´ false ë°˜í™˜
     {
         if (r < 0 || c < 0 || r >= row || c >= col)
             return false;
         else
-            return (map[r][c] == 0 || map[r][c] == 'x'); // 0(Åë·Î) È¤Àº x(Ãâ±¸) ÀÏ°æ¿ì true ¹İÈ¯
+            return (map[r][c] == 0 || map[r][c] == 'x'); // 0(í†µë¡œ) í˜¹ì€ x(ì¶œêµ¬) ì¼ê²½ìš° true ë°˜í™˜
     }
 
-    void searchWidth() // ³Êºñ¿ì¼± 
+    void searchWidth() // ë„ˆë¹„ìš°ì„  
     {
-        bluePrint(); //ÃÊ±â map »óÅÂ º¸¿©ÁÖ±â À§ÇÔ
+        bluePrint(); //ì´ˆê¸° map ìƒíƒœ ë³´ì—¬ì£¼ê¸° ìœ„í•¨
 
         while (locQueue.isEmpty() == false) {
-            Location* here = locQueue.dequeue()->getLocation(); //ÇöÀç À§Ä¡´Â setMaze¿¡¼­ push Çß´ø entryÀ§Ä¡
+            Location* here = locQueue.dequeue()->getLocation(); //í˜„ì¬ ìœ„ì¹˜ëŠ” setMazeì—ì„œ enqueue í–ˆë˜ entryìœ„ì¹˜
 
             int r = here->getRow();
             int c = here->getCol();
             here->display();
 
-            if (exitLoc.getRow() == r && exitLoc.getCol() == c) // setMaze¿¡¼­ ÀúÀåÇØµĞ À§Ä¡°ª(Ãâ±¸)ÀÌ ÀÏÄ¡ÇÑ´Ù¸é
+            if (exitLoc.getRow() == r && exitLoc.getCol() == c) // setMazeì—ì„œ ì €ì¥í•´ë‘” ìœ„ì¹˜ê°’(ì¶œêµ¬)ì´ ì¼ì¹˜í•œë‹¤ë©´
             {
-                printf("¹Ì·ÎÃ£±â ¼º°ø!\n");
+                printf("ë¯¸ë¡œì°¾ê¸° ì„±ê³µ!\n");
                 exit(1);
             }
             else {
-                map[r][c] = 2; // ÇöÀç À§Ä¡°¡ Ãâ±¸°¡ ¾Æ´Ï¶ó¸é?
+                map[r][c] = 2; // í˜„ì¬ ìœ„ì¹˜ê°€ ì¶œêµ¬ê°€ ì•„ë‹ˆë¼ë©´?
                 bluePrint();
                 if (isValidLoc(r - 1, c)) { locQueue.enqueue(new Node(r - 1, c)); }
                 if (isValidLoc(r + 1, c)) { locQueue.enqueue(new Node(r + 1, c)); }
@@ -151,24 +151,24 @@ public:
         }
     }
 
-    void searchHeight() // ±íÀÌ¿ì¼±
+    void searchHeight() // ê¹Šì´ìš°ì„ 
     {
-        bluePrint(); //ÃÊ±â map »óÅÂ º¸¿©ÁÖ±â À§ÇÔ
+        bluePrint(); //ì´ˆê¸° map ìƒíƒœ ë³´ì—¬ì£¼ê¸° ìœ„í•¨
 
         while (locQueue.isEmpty() == false) {
-            Location* here = locQueue.dequeue()->getLocation(); //ÇöÀç À§Ä¡´Â setMaze¿¡¼­ push Çß´ø entryÀ§Ä¡
+            Location* here = locQueue.dequeue()->getLocation(); //í˜„ì¬ ìœ„ì¹˜ëŠ” setMazeì—ì„œ enqueue í–ˆë˜ entryìœ„ì¹˜
 
             int r = here->getRow();
             int c = here->getCol();
             here->display();
 
-            if (exitLoc.getRow() == r && exitLoc.getCol() == c) // setMaze¿¡¼­ ÀúÀåÇØµĞ À§Ä¡°ª(Ãâ±¸)ÀÌ ÀÏÄ¡ÇÑ´Ù¸é
+            if (exitLoc.getRow() == r && exitLoc.getCol() == c) // setMazeì—ì„œ ì €ì¥í•´ë‘” ìœ„ì¹˜ê°’(ì¶œêµ¬)ì´ ì¼ì¹˜í•œë‹¤ë©´
             {
-                printf("¹Ì·ÎÃ£±â ¼º°ø!\n");
+                printf("ë¯¸ë¡œì°¾ê¸° ì„±ê³µ!\n");
                 exit(1);
             }
             else {
-                map[r][c] = 2; // ÇöÀç À§Ä¡°¡ Ãâ±¸°¡ ¾Æ´Ï¶ó¸é?
+                map[r][c] = 2; // í˜„ì¬ ìœ„ì¹˜ê°€ ì¶œêµ¬ê°€ ì•„ë‹ˆë¼ë©´?
                 bluePrint();
                 if (isValidLoc(r, c - 1)) { locQueue.enqueue(new Node(r, c - 1)); }
                 if (isValidLoc(r, c + 1)) { locQueue.enqueue(new Node(r, c + 1)); }
