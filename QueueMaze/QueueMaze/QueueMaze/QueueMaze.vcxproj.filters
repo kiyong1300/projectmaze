@@ -31,6 +31,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\StackMaze\LinkedStackMaze\maze.txt" />
+    <Text Include="maze.txt" />
   </ItemGroup>
 </Project>
